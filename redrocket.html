@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Red Rocket – Szczegóły</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', Arial, sans-serif;
+      background-image: url('https://i.imgur.com/crp8KA3.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+    }
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+    table {
+      margin: 0 auto;
+      border-collapse: collapse;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 15px 25px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    th {
+      background-color: rgba(255, 60, 60, 0.3);
+    }
+    td {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+    p {
+      max-width: 700px;
+      margin: 30px auto;
+      font-size: 1.2em;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 18px 40px;
+      font-size: 1.2em;
+      font-family: 'Orbitron', Arial, sans-serif;
+      letter-spacing: 1px;
+      background: radial-gradient(circle at 30% 30%, #ff3c3c, #7f00ff);
+      color: white;
+      border: 2px solid #ffffff55;
+      border-radius: 60px;
+      box-shadow: 0 0 20px rgba(255, 60, 60, 0.8), 0 0 40px rgba(127, 0, 255, 0.6);
+      cursor: pointer;
+      text-shadow: 1px 1px 3px #000;
+      transition: all 0.3s ease;
+      animation: pulseGlow 2s infinite, scalePulse 2s infinite;
+      text-decoration: none;
+    }
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 60, 60, 0.5), 0 0 60px rgba(255, 60, 60, 0.2);
+      }
+      50% {
+        box-shadow: 0 0 40px rgba(255, 80, 80, 0.9), 0 0 80px rgba(255, 80, 80, 0.4);
+      }
+    }
+    @keyframes scalePulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.08);
+      }
+    }
+    .glow {
+      text-shadow: 0 0 10px #ff3c3c, 0 0 20px #ff3c3c, 0 0 40px #ff3c3c;
+      animation: glowCycle 2.5s infinite ease-in-out;
+    }
+    @keyframes glowCycle {
+      0%, 100% {
+        text-shadow: 0 0 10px #ff3c3c, 0 0 20px #ff3c3c, 0 0 40px #ff3c3c;
+      }
+      50% {
+        text-shadow: 0 0 20px #ff5c5c, 0 0 40px #ff5c5c, 0 0 80px #ff5c5c;
+      }
+    }
+    .planet {
+      background: radial-gradient(circle, #ff3c3c 0%, #000 80%);
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin: 30px auto 10px auto;
+      box-shadow: 0 0 40px rgba(255, 60, 60, 0.7);
+      animation: floatPlanet 6s ease-in-out infinite;
+    }
+    .planet-caption {
+      font-size: 0.9em;
+      color: #ff3c3c;
+      margin-bottom: 40px;
+      text-shadow: 0 0 5px #000;
+    }
+    @keyframes floatPlanet {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+  .menu-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 999;
+}
+.menu-toggle span {
+  display: block;
+  height: 4px;
+  background: white;
+  margin: 6px 0;
+  border-radius: 2px;
+  transition: 0.3s ease;
+}
+.menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 200px;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: right 0.3s ease;
+  z-index: 998;
+}
+.menu a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2em;
+  margin: 15px 0;
+}
+.menu.show {
+  right: 0;
+}
+</style>
+<script>
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('show');
+}
+</script>
+</head>
+<body>
+  <div class="menu-toggle" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="menu" id="mobileMenu">
+    <a href="index.html">Strona główna</a>
+    <a href="smaki.html">Smaki</a>
+    <a href="#">Znajdź stację</a>
+    <a href="#">Kontakt</a>
+  </div>
+  <h1 class="glow">🔴 Red Rocket</h1>
+
+  <p>Startujemy prosto na TikToka! 🚀 Red Rocket to truskawkowy napęd hiperprzestrzenny – zero cukru, a smaku tyle, że algorytm nie nadąża. Wskakuj do rakiety i leć viralem!</p>
+
+  <div class="planet"></div>
+  <div class="planet-caption">Planeta pochodzenia: STRAWBERRY-X</div>
+
+  <h2>Wartość odżywcza (na 100 ml gotowego napoju):</h2>
+  <table>
+    <tr><th>Składnik</th><th>Ilość</th></tr>
+    <tr><td>Wartość energetyczna</td><td>11 kcal</td></tr>
+    <tr><td>Tłuszcz</td><td>0 g</td></tr>
+    <tr><td>Węglowodany</td><td>4.5 g</td></tr>
+    <tr><td>w tym cukry</td><td>0 g</td></tr>
+    <tr><td>Białko</td><td>0 g</td></tr>
+    <tr><td>Sól</td><td>0 g</td></tr>
+  </table>
+
+  <h2>Skład:</h2>
+  <p>Woda, stabilizator: glicerol; regulator kwasowości: kwas cytrynowy; substancje słodzące: cyklaminian sodu, sukraloza, acesulfam K; maltodekstryna; substancje konserwujące: sorbinian potasu, benzoesan sodu; aromat; barwnik: azorubina.</p>
+
+  <a href="smaki.html" class="btn">🚀 WRÓĆ DO SMAKÓW</a>
+</body>
+</html>
