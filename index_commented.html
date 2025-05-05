@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cosmo Freeze</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    /* Ogólny styl dla całej strony */
+    body {
+      margin: 0;
+      font-family: 'Orbitron', Arial, sans-serif;
+      background-image: url('https://i.imgur.com/crp8KA3.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: white;
+      text-align: center;
+    }
+
+    /* Sekcja główna z animacją tła */
+    .hero {
+      padding: 100px 20px;
+      background: rgba(0, 0, 0, 0.6);
+      animation: glowPulse 6s ease-in-out infinite;
+    }
+
+    /* Styl dla logotypu */
+    .hero img {
+      max-width: 300px;
+      margin-bottom: 30px;
+    }
+
+    /* Pojemnik loga z animacją unoszenia */
+    .logo-container {
+      position: relative;
+      display: inline-block;
+      animation: float 3.5s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    /* Efekt poświaty wokół logo */
+    .logo-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 320px;
+      height: 320px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(0, 255, 255, 0.25), rgba(0, 255, 255, 0.05), transparent);
+      border-radius: 50%;
+      filter: blur(10px);
+      z-index: 1;
+      opacity: 1;
+    }
+
+    /* Tekst powitalny */
+    .hero p {
+      font-size: 1.5em;
+      max-width: 700px;
+      margin: 0 auto;
+      text-shadow: 1px 1px 5px #000;
+    }
+
+    /* Styl przycisku CTA */
+    .btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 18px 40px;
+      font-size: 1.3em;
+      font-family: 'Orbitron', Arial, sans-serif;
+      letter-spacing: 1px;
+      background: radial-gradient(circle at 30% 30%, #00d4ff, #7f00ff);
+      color: white;
+      border: 2px solid #ffffff55;
+      border-radius: 60px;
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.8), 0 0 40px rgba(127, 0, 255, 0.6);
+      cursor: pointer;
+      text-shadow: 1px 1px 3px #000;
+      transition: all 0.3s ease;
+      animation: pulseGlow 2s infinite, scalePulse 2s infinite;
+    }
+
+    /* Efekt hover dla przycisku */
+    .btn:hover {
+      background: linear-gradient(135deg, #7f00ff, #00d4ff);
+      box-shadow: 0 0 25px rgba(127, 0, 255, 0.9);
+    }
+
+    /* Animacja unoszenia loga */
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+      }
+      50% {
+        transform: translateY(-12px) scale(1.03);
+      }
+    }
+
+    /* Animacja pulsującego tła */
+    @keyframes glowPulse {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), 0 0 60px rgba(0, 255, 255, 0.2);
+      }
+      50% {
+        box-shadow: 0 0 40px rgba(0, 255, 255, 0.9), 0 0 80px rgba(0, 255, 255, 0.4);
+      }
+    }
+
+    /* Animacja pulsowania przycisku */
+    @keyframes scalePulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.08);
+      }
+    }
+  </style>
+
+  <style>
+    /* Styl przycisku rozwijanego menu */
+    .menu-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 30px;
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    /* Paseczki w przycisku menu */
+    .menu-toggle span {
+      display: block;
+      height: 4px;
+      background: white;
+      margin: 6px 0;
+      border-radius: 2px;
+      transition: 0.3s ease;
+    }
+
+    /* Panel rozwijanego menu */
+    .menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 200px;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: right 0.3s ease;
+      z-index: 998;
+    }
+
+    /* Linki w menu */
+    .menu a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2em;
+      margin: 15px 0;
+    }
+
+    /* Klasa aktywująca widoczność menu */
+    .menu.show {
+      right: 0;
+    }
+  </style>
+
+  <script>
+    // Funkcja przełącza widoczność menu mobilnego
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('show');
+    }
+  </script>
+</head>
+
+<body>
+  <!-- Przycisk do rozwijania menu -->
+  <div class="menu-toggle" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- Menu nawigacyjne -->
+  <div class="menu" id="mobileMenu">
+    <a href="#">Strona główna</a>
+    <a href="smaki.html">Smaki</a>
+    <a href="#">Znajdź stację</a>
+    <a href="#">Kontakt</a>
+  </div>
+
+  <!-- Sekcja powitalna strony -->
+  <section class="hero">
+    <div class="logo-container">
+      <img src="https://i.imgur.com/kmvbnSV.png" alt="CosmoFreeze Logo" />
+      <div class="logo-glow"></div>
+    </div>
+    <p>Zamroź nudę! CosmoFreeze to turboorzeźwienie z innej galaktyki. Zero cukru, max frajdy!</p>
+    <a href="#" class="btn">🪐 STACJE CosmoFreeze</a>
+  </section>
+</body>
+</html>
