@@ -1,208 +1,77 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cosmo Freeze</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-  <style>
-    /* Ogólny styl dla całej strony */
-    body {
-      margin: 0;
-      font-family: 'Orbitron', Arial, sans-serif;
-      background-image: url('https://i.imgur.com/crp8KA3.jpeg');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      color: white;
-      text-align: center;
-    }
-
-    /* Sekcja główna z animacją tła */
-    .hero {
-      padding: 100px 20px;
-      background: rgba(0, 0, 0, 0.6);
-      animation: glowPulse 6s ease-in-out infinite;
-    }
-
-    /* Styl dla logotypu */
-    .hero img {
-      max-width: 300px;
-      margin-bottom: 30px;
-    }
-
-    /* Pojemnik loga z animacją unoszenia */
-    .logo-container {
-      position: relative;
-      display: inline-block;
-      animation: float 3.5s ease-in-out infinite;
-      will-change: transform;
-    }
-
-    /* Efekt poświaty wokół logo */
-    .logo-glow {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 320px;
-      height: 320px;
-      transform: translate(-50%, -50%);
-      background: radial-gradient(circle, rgba(0, 255, 255, 0.25), rgba(0, 255, 255, 0.05), transparent);
-      border-radius: 50%;
-      filter: blur(10px);
-      z-index: 1;
-      opacity: 1;
-    }
-
-    /* Tekst powitalny */
-    .hero p {
-      font-size: 1.5em;
-      max-width: 700px;
-      margin: 0 auto;
-      text-shadow: 1px 1px 5px #000;
-    }
-
-    /* Styl przycisku CTA */
-    .btn {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 18px 40px;
-      font-size: 1.3em;
-      font-family: 'Orbitron', Arial, sans-serif;
-      letter-spacing: 1px;
-      background: radial-gradient(circle at 30% 30%, #00d4ff, #7f00ff);
-      color: white;
-      border: 2px solid #ffffff55;
-      border-radius: 60px;
-      box-shadow: 0 0 20px rgba(0, 212, 255, 0.8), 0 0 40px rgba(127, 0, 255, 0.6);
-      cursor: pointer;
-      text-shadow: 1px 1px 3px #000;
-      transition: all 0.3s ease;
-      animation: pulseGlow 2s infinite, scalePulse 2s infinite;
-    }
-
-    /* Efekt hover dla przycisku */
-    .btn:hover {
-      background: linear-gradient(135deg, #7f00ff, #00d4ff);
-      box-shadow: 0 0 25px rgba(127, 0, 255, 0.9);
-    }
-
-    /* Animacja unoszenia loga */
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0) scale(1);
-      }
-      50% {
-        transform: translateY(-12px) scale(1.03);
-      }
-    }
-
-    /* Animacja pulsującego tła */
-    @keyframes glowPulse {
-      0%, 100% {
-        box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), 0 0 60px rgba(0, 255, 255, 0.2);
-      }
-      50% {
-        box-shadow: 0 0 40px rgba(0, 255, 255, 0.9), 0 0 80px rgba(0, 255, 255, 0.4);
-      }
-    }
-
-    /* Animacja pulsowania przycisku */
-    @keyframes scalePulse {
-      0%, 100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.08);
-      }
-    }
-  </style>
-
-  <style>
-    /* Styl przycisku rozwijanego menu */
-    .menu-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      width: 40px;
-      height: 30px;
-      cursor: pointer;
-      z-index: 999;
-    }
-
-    /* Paseczki w przycisku menu */
-    .menu-toggle span {
-      display: block;
-      height: 4px;
-      background: white;
-      margin: 6px 0;
-      border-radius: 2px;
-      transition: 0.3s ease;
-    }
-
-    /* Panel rozwijanego menu */
-    .menu {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 200px;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.9);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transition: right 0.3s ease;
-      z-index: 998;
-    }
-
-    /* Linki w menu */
-    .menu a {
-      color: white;
-      text-decoration: none;
-      font-size: 1.2em;
-      margin: 15px 0;
-    }
-
-    /* Klasa aktywująca widoczność menu */
-    .menu.show {
-      right: 0;
-    }
-  </style>
-
-  <script>
-    // Funkcja przełącza widoczność menu mobilnego
-    function toggleMenu() {
-      document.getElementById('mobileMenu').classList.toggle('show');
-    }
-  </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CosmoFreeze – Turboorzeźwienie z innej galaktyki</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#010410;color:#fff;font-family:'Orbitron',monospace;min-height:100vh;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+canvas.stars{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(1,4,16,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.1rem;letter-spacing:.15em;color:#00d4ff;text-shadow:0 0 14px #00d4ff}
+.nav-logo img{width:36px;height:36px;border-radius:50%;border:1px solid #00d4ff44}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.6);transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:#00d4ff}
+.nav-toggle{display:none;background:none;border:none;color:#00d4ff;font-size:1.4rem;cursor:pointer}
+@media(max-width:640px){.nav-links{display:none;position:absolute;top:60px;left:0;right:0;background:rgba(1,4,16,.97);flex-direction:column;padding:20px 24px;gap:16px;border-bottom:1px solid rgba(255,255,255,.08)}.nav-links.open{display:flex}.nav-toggle{display:block}}
+.hero{position:relative;z-index:10;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 20px}
+.glow-blob{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none;opacity:.5}
+.blob-cyan{width:400px;height:400px;background:#00d4ff22;top:20%;left:20%}
+.blob-purple{width:400px;height:400px;background:#aa88ff22;bottom:20%;right:20%}
+.logo{width:180px;height:180px;border-radius:50%;border:2px solid rgba(0,212,255,.3);box-shadow:0 0 40px rgba(0,212,255,.5);margin-bottom:32px;animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0);}50%{transform:translateY(-15px) rotate(2deg);}}
+h1{font-size:clamp(2.5rem,8vw,5rem);font-weight:900;text-transform:uppercase;letter-spacing:.1em;color:#fff;text-shadow:0 0 30px rgba(0,212,255,.6),0 0 60px rgba(0,212,255,.3);margin-bottom:16px}
+h1 span{color:#00d4ff}
+.tagline{font-size:clamp(.9rem,2.5vw,1.3rem);color:rgba(176,224,255,.7);margin-bottom:48px;max-width:500px}
+.btn-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-bottom:24px}
+.btn{display:inline-block;padding:18px 40px;font-family:'Orbitron',monospace;font-size:1.3rem;font-weight:900;text-transform:uppercase;letter-spacing:.2em;border:2.5px solid;cursor:pointer;position:relative;overflow:hidden;transition:color .3s;background:transparent}
+.btn::before{content:'';position:absolute;inset:0;transform:scaleX(0);transform-origin:left;transition:transform .3s;z-index:-1}
+.btn:hover::before{transform:scaleX(1)}
+.btn:hover{color:#010410}
+.btn-cyan{color:#00d4ff;border-color:#00d4ff;box-shadow:0 0 20px rgba(0,212,255,.4)}
+.btn-cyan::before{background:#00d4ff}
+.btn-purple{color:#aa88ff;border-color:#aa88ff;box-shadow:0 0 20px rgba(170,136,255,.4)}
+.btn-purple::before{background:#aa88ff}
+.btn-sm{font-size:.75rem;padding:12px 28px;letter-spacing:.2em;border-width:1.5px;opacity:.7}
+.btn-sm:hover{opacity:1}
+</style>
 </head>
-
 <body>
-  <!-- Przycisk do rozwijania menu -->
-  <div class="menu-toggle" onclick="toggleMenu()">
-    <span></span>
-    <span></span>
-    <span></span>
+<canvas class="stars" id="stars"></canvas>
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="https://i.imgur.com/kmvbnSV.png" alt="Logo">
+    CosmoFreeze
+  </a>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Strona główna</a></li>
+    <li><a href="smaki.html">Smaki</a></li>
+    <li><a href="stacje.html">Stacje</a></li>
+    <li><a href="gra.html">Gra</a></li>
+  </ul>
+</nav>
+<main class="hero">
+  <div class="glow-blob blob-cyan"></div>
+  <div class="glow-blob blob-purple"></div>
+  <img src="https://i.imgur.com/kmvbnSV.png" alt="CosmoFreeze Logo" class="logo">
+  <h1>Cosmo<span>Freeze</span></h1>
+  <p class="tagline">Zamroź nudę! CosmoFreeze to turboorzeźwienie z innej galaktyki.</p>
+  <div class="btn-row">
+    <a href="gra.html" class="btn btn-cyan">🎮 GRAJ</a>
+    <a href="gra.html#ranking" class="btn btn-purple">🏆 RANKING</a>
   </div>
-
-  <!-- Menu nawigacyjne -->
-  <div class="menu" id="mobileMenu">
-    <a href="#">Strona główna</a>
-    <a href="smaki.html">Smaki</a>
-    <a href="#">Znajdź stację</a>
-    <a href="#">Kontakt</a>
-  </div>
-
-  <!-- Sekcja powitalna strony -->
-  <section class="hero">
-    <div class="logo-container">
-      <img src="https://i.imgur.com/kmvbnSV.png" alt="CosmoFreeze Logo" />
-      <div class="logo-glow"></div>
-    </div>
-    <p>Zamroź nudę! CosmoFreeze to turboorzeźwienie z innej galaktyki. Zero cukru, max frajdy!</p>
-    <a href="#" class="btn">🪐 STACJE CosmoFreeze</a>
-  </section>
+  <a href="stacje.html" class="btn btn-sm btn-cyan">STACJE CosmoFreeze →</a>
+</main>
+<script>
+const c=document.getElementById('stars'),x=c.getContext('2d');
+function rs(){c.width=innerWidth;c.height=innerHeight}rs();addEventListener('resize',rs);
+const st=Array.from({length:120},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.4+.3,s:Math.random()*.5+.1,a:Math.random()*.7+.3}));
+function draw(){x.clearRect(0,0,c.width,c.height);st.forEach(s=>{s.y+=s.s;if(s.y>c.height){s.y=0;s.x=Math.random()*c.width}x.beginPath();x.arc(s.x,s.y,s.r,0,Math.PI*2);x.fillStyle=`rgba(255,255,255,${s.a})`;x.fill()});requestAnimationFrame(draw)}draw();
+</script>
 </body>
 </html>
-
