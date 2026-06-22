@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CosmoFreeze – Stacje Lądowania</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{background:#010410;color:#fff;font-family:'Orbitron',monospace;min-height:100vh;overflow-x:hidden}a{text-decoration:none;color:inherit}
+canvas.stars{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(1,4,16,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.1rem;letter-spacing:.15em;color:#00d4ff;text-shadow:0 0 14px #00d4ff}
+.nav-logo img{width:36px;height:36px;border-radius:50%;border:1px solid #00d4ff44}
+.nav-links{display:flex;gap:28px;list-style:none}.nav-links a{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.6);transition:color .2s}.nav-links a:hover,.nav-links a.active{color:#00d4ff}
+.nav-toggle{display:none;background:none;border:none;color:#00d4ff;font-size:1.4rem;cursor:pointer}
+@media(max-width:640px){.nav-links{display:none;position:absolute;top:60px;left:0;right:0;background:rgba(1,4,16,.97);flex-direction:column;padding:20px 24px;gap:16px;border-bottom:1px solid rgba(255,255,255,.08)}.nav-links.open{display:flex}.nav-toggle{display:block}}
+main{position:relative;z-index:10;padding:90px 20px 60px;max-width:1100px;margin:0 auto}
+.back{display:inline-flex;align-items:center;gap:8px;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:32px;transition:color .2s}.back:hover{color:#00d4ff}
+.header{text-align:center;margin-bottom:56px}
+.header .sub{font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(0,212,255,.7);margin-bottom:12px}
+h1{font-size:clamp(2rem,6vw,3.5rem);font-weight:900;text-transform:uppercase;letter-spacing:.1em;text-shadow:0 0 30px rgba(0,212,255,.6);margin-bottom:12px}
+.header p{color:rgba(255,255,255,.5);font-size:.85rem;max-width:450px;margin:0 auto;line-height:1.7}
+.grid{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:700px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card{border-radius:16px;border:1.5px solid;background:rgba(255,255,255,.05);backdrop-filter:blur(8px);padding:24px;display:flex;flex-direction:column;gap:18px;position:relative;overflow:hidden}
+.card-top{position:absolute;top:0;left:0;right:0;height:3px}
+.card-cyan{border-color:rgba(0,212,255,.4);box-shadow:0 0 20px rgba(0,212,255,.15)}
+.card-cyan .card-top{background:rgba(0,212,255,.3)}
+.card-purple{border-color:rgba(170,136,255,.4);box-shadow:0 0 20px rgba(170,136,255,.15)}
+.card-purple .card-top{background:rgba(170,136,255,.3)}
+.card-head{display:flex;justify-content:space-between;align-items:flex-start}
+.baza-id{font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;margin-bottom:4px}
+.baza-name{font-size:1.4rem;font-weight:900;text-transform:uppercase;letter-spacing:.1em}
+.cyan{color:#00d4ff}.purple{color:#aa88ff}
+.icon-circle{width:40px;height:40px;border-radius:50%;border:1.5px solid;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.icon-cyan{border-color:#00d4ff;background:rgba(0,212,255,.1)}
+.icon-purple{border-color:#aa88ff;background:rgba(170,136,255,.1)}
+.address p:first-child{font-size:.85rem;font-weight:500;color:#fff}
+.address p:last-child{font-size:.8rem;color:rgba(255,255,255,.5)}
+.hours-box{border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.hours-cyan{background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.2)}
+.hours-purple{background:rgba(170,136,255,.08);border:1px solid rgba(170,136,255,.2)}
+.hours-label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.hours-row{display:flex;justify-content:space-between;font-size:.8rem}
+.hours-row span:first-child{color:rgba(255,255,255,.55)}
+.hours-row span:last-child{font-weight:500}
+.closed{color:#f87171!important}
+.btn-maps{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:10px;border:2px solid;font-family:'Orbitron',monospace;font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;transition:background .2s;cursor:pointer;background:transparent}
+.btn-cyan-maps{color:#00d4ff;border-color:#00d4ff}.btn-cyan-maps:hover{background:rgba(0,212,255,.1)}
+.btn-purple-maps{color:#aa88ff;border-color:#aa88ff}.btn-purple-maps:hover{background:rgba(170,136,255,.1)}
+.footer-note{text-align:center;margin-top:48px;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+</style>
+</head>
+<body>
+<canvas class="stars" id="stars"></canvas>
+<nav>
+  <a href="index.html" class="nav-logo"><img src="https://i.imgur.com/kmvbnSV.png" alt="Logo">CosmoFreeze</a>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+  <ul class="nav-links">
+    <li><a href="index.html">Strona główna</a></li>
+    <li><a href="smaki.html">Smaki</a></li>
+    <li><a href="stacje.html" class="active">Stacje</a></li>
+    <li><a href="gra.html">Gra</a></li>
+  </ul>
+</nav>
+<main>
+  <a href="index.html" class="back">← Powrót do bazy</a>
+  <div class="header">
+    <p class="sub">Skanowanie radarowe ukończone</p>
+    <h1>STACJE LĄDOWANIA</h1>
+    <p>Znajdź najbliższą bazę CosmoFreeze i zamroź nudę już dziś.</p>
+  </div>
+  <div class="grid">
+    <!-- BAZA 01 -->
+    <div class="card card-cyan">
+      <div class="card-top"></div>
+      <div class="card-head">
+        <div>
+          <p class="baza-id cyan">BAZA 01</p>
+          <p class="baza-name cyan">Grysik</p>
+        </div>
+        <div class="icon-circle icon-cyan">📍</div>
+      </div>
+      <div class="address">
+        <p>Gustawa Morcinka 5</p>
+        <p>93-217 Łódź</p>
+      </div>
+      <div class="hours-box hours-cyan">
+        <p class="hours-label cyan">🕐 Godziny otwarcia</p>
+        <div class="hours-row"><span>Pon – Pt</span><span>06:00 – 20:00</span></div>
+        <div class="hours-row"><span>Sobota</span><span>06:00 – 14:00</span></div>
+        <div class="hours-row"><span>Niedziela</span><span class="closed">Zamknięte</span></div>
+      </div>
+      <a href="https://maps.google.com/?q=Gustawa+Morcinka+5,+93-217+%C5%81%C3%B3d%C5%BA" target="_blank" rel="noopener noreferrer" class="btn-maps btn-cyan-maps">🧭 Wyznacz trasę</a>
+    </div>
+    <!-- BAZA 02 -->
+    <div class="card card-purple">
+      <div class="card-top"></div>
+      <div class="card-head">
+        <div>
+          <p class="baza-id purple">BAZA 02</p>
+          <p class="baza-name purple">Witaj</p>
+        </div>
+        <div class="icon-circle icon-purple">📍</div>
+      </div>
+      <div class="address">
+        <p>Emilii Plater 20</p>
+        <p>91-762 Łódź</p>
+      </div>
+      <div class="hours-box hours-purple">
+        <p class="hours-label purple">🕐 Godziny otwarcia</p>
+        <div class="hours-row"><span>Pon – Pt</span><span>07:00 – 20:00</span></div>
+        <div class="hours-row"><span>Sobota</span><span>08:00 – 17:00</span></div>
+        <div class="hours-row"><span>Niedziela</span><span class="closed">Zamknięte</span></div>
+      </div>
+      <a href="https://maps.google.com/?q=Emilii+Plater+20,+91-762+%C5%81%C3%B3d%C5%BA" target="_blank" rel="noopener noreferrer" class="btn-maps btn-purple-maps">🧭 Wyznacz trasę</a>
+    </div>
+    <!-- BAZA 03 -->
+    <div class="card card-cyan">
+      <div class="card-top"></div>
+      <div class="card-head">
+        <div>
+          <p class="baza-id cyan">BAZA 03</p>
+          <p class="baza-name cyan">Groszek</p>
+        </div>
+        <div class="icon-circle icon-cyan">📍</div>
+      </div>
+      <div class="address">
+        <p>Milionowa 86</p>
+        <p>90-001 Łódź</p>
+      </div>
+      <div class="hours-box hours-cyan">
+        <p class="hours-label cyan">🕐 Godziny otwarcia</p>
+        <div class="hours-row"><span>Pon – Pt</span><span>06:00 – 21:00</span></div>
+        <div class="hours-row"><span>Sobota</span><span>07:00 – 18:00</span></div>
+        <div class="hours-row"><span>Niedziela</span><span class="closed">Zamknięte</span></div>
+      </div>
+      <a href="https://maps.google.com/?q=Milionowa+86,+90-001+%C5%81%C3%B3d%C5%BA" target="_blank" rel="noopener noreferrer" class="btn-maps btn-cyan-maps">🧭 Wyznacz trasę</a>
+    </div>
+  </div>
+  <p class="footer-note">Wszystkie stacje zlokalizowane w Łódź, Polska</p>
+</main>
+<script>
+const c=document.getElementById('stars'),x=c.getContext('2d');
+function rs(){c.width=innerWidth;c.height=innerHeight}rs();addEventListener('resize',rs);
+const st=Array.from({length:100},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.4+.3,s:Math.random()*.5+.1,a:Math.random()*.7+.3}));
+function draw(){x.clearRect(0,0,c.width,c.height);st.forEach(s=>{s.y+=s.s;if(s.y>c.height){s.y=0;s.x=Math.random()*c.width}x.beginPath();x.arc(s.x,s.y,s.r,0,Math.PI*2);x.fillStyle=`rgba(255,255,255,${s.a})`;x.fill()});requestAnimationFrame(draw)}draw();
+</script>
+</body>
+</html>

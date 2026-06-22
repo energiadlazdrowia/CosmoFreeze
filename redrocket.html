@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CosmoFreeze – Nasze Smaki</title>
+<title>CosmoFreeze – Red Rocket</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}body{background:#010410;color:#fff;font-family:'Orbitron',monospace;min-height:100vh;overflow-x:hidden}a{text-decoration:none;color:inherit}
@@ -14,25 +16,30 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(1,4,16,.85);b
 .nav-links{display:flex;gap:28px;list-style:none}.nav-links a{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.6);transition:color .2s}.nav-links a:hover,.nav-links a.active{color:#00d4ff}
 .nav-toggle{display:none;background:none;border:none;color:#00d4ff;font-size:1.4rem;cursor:pointer}
 @media(max-width:640px){.nav-links{display:none;position:absolute;top:60px;left:0;right:0;background:rgba(1,4,16,.97);flex-direction:column;padding:20px 24px;gap:16px;border-bottom:1px solid rgba(255,255,255,.08)}.nav-links.open{display:flex}.nav-toggle{display:block}}
-main{position:relative;z-index:10;padding:90px 20px 60px;max-width:1000px;margin:0 auto}
-h1{font-size:clamp(2rem,6vw,3.5rem);font-weight:900;text-transform:uppercase;letter-spacing:.12em;text-align:center;margin-bottom:12px;text-shadow:0 0 30px rgba(0,212,255,.6)}
-.line{width:80px;height:3px;background:#00d4ff;margin:0 auto 48px;border-radius:4px;box-shadow:0 0 12px #00d4ff}
-.grid{display:grid;grid-template-columns:1fr;gap:24px}
-@media(min-width:700px){.grid{grid-template-columns:1fr 1fr}}
-.card{border-radius:16px;border:1.5px solid;background:rgba(0,0,0,.4);backdrop-filter:blur(8px);padding:32px;position:relative;overflow:hidden;transition:border-color .3s}
-.card-blue{border-color:rgba(0,212,255,.3)}.card-blue:hover{border-color:#00d4ff;box-shadow:0 0 30px rgba(0,212,255,.2)}
-.card-red{border-color:rgba(255,0,51,.3)}.card-red:hover{border-color:#ff0033;box-shadow:0 0 30px rgba(255,0,51,.2)}
-.badge{position:absolute;top:16px;right:16px;padding:4px 14px;font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;border-radius:50px;border:1.5px solid}
-.badge-blue{color:#00d4ff;border-color:#00d4ff;background:rgba(0,212,255,.1)}
-.badge-red{color:#ff0033;border-color:#ff0033;background:rgba(255,0,51,.1)}
-.card h2{font-size:1.8rem;font-weight:900;text-transform:uppercase;letter-spacing:.12em;margin-bottom:16px;text-align:center}
-.card-blue h2{color:#00d4ff;text-shadow:0 0 20px rgba(0,212,255,.5)}
-.card-red h2{color:#ff0033;text-shadow:0 0 20px rgba(255,0,51,.5)}
-.card p{text-align:center;line-height:1.7;margin-bottom:28px;color:rgba(200,220,255,.8);font-size:.85rem}
-.card a{display:block;width:100%;text-align:center;padding:12px;font-family:'Orbitron',monospace;font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;border:1.5px solid;transition:all .2s;cursor:pointer}
-.card-blue a{color:#00d4ff;border-color:#00d4ff}.card-blue a:hover{background:#00d4ff;color:#010410}
-.card-red a{color:#ff0033;border-color:#ff0033}.card-red a:hover{background:#ff0033;color:#010410}
-.back{display:inline-flex;align-items:center;gap:8px;margin-top:48px;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);transition:color .2s}.back:hover{color:#00d4ff}
+main{position:relative;z-index:10;padding:90px 20px 60px;max-width:900px;margin:0 auto}
+.back{display:inline-flex;align-items:center;gap:8px;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,0,51,.7);margin-bottom:32px;transition:color .2s}.back:hover{color:#ff0033}
+.hero{display:grid;grid-template-columns:1fr;gap:40px;align-items:center;margin-bottom:60px}
+@media(min-width:700px){.hero{grid-template-columns:1fr 1fr}}
+.planet-wrap{display:flex;flex-direction:column;align-items:center;gap:16px}
+.planet{width:220px;height:220px;border-radius:50%;background:radial-gradient(circle at 35% 35%, #ff6655, #aa0022, #000);border:1.5px solid rgba(255,0,51,.5);box-shadow:0 0 50px rgba(255,0,51,.6),inset 0 0 20px rgba(0,0,0,.8);position:relative;overflow:hidden;animation:spin 20s linear infinite}
+@keyframes spin{to{filter:hue-rotate(20deg)}}
+.planet-label{background:rgba(0,0,0,.6);border:1px solid rgba(255,0,51,.3);padding:6px 14px;border-radius:8px;font-size:.6rem;letter-spacing:.2em;color:rgba(255,100,100,.8);text-transform:uppercase;backdrop-filter:blur(8px)}
+.badge{display:inline-block;padding:5px 16px;font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;border-radius:50px;border:1.5px solid #ff0033;color:#ff0033;background:rgba(255,0,51,.1);margin-bottom:16px}
+h1{font-size:clamp(2.2rem,6vw,4rem);font-weight:900;text-transform:uppercase;letter-spacing:.12em;color:#ff0033;text-shadow:0 0 30px rgba(255,0,51,.6);margin-bottom:8px}
+.flavor{font-size:.9rem;color:rgba(255,180,180,.5);text-transform:uppercase;letter-spacing:.2em;margin-bottom:20px}
+.desc{font-size:.9rem;line-height:1.8;color:rgba(255,200,200,.8)}
+.card{background:rgba(0,0,0,.4);border:1.5px solid rgba(255,0,51,.2);border-radius:16px;padding:28px;backdrop-filter:blur(8px)}
+h3{font-size:1rem;color:#ff0033;text-transform:uppercase;letter-spacing:.2em;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid rgba(255,0,51,.2)}
+table{width:100%;border-collapse:collapse;margin-bottom:32px;font-size:.8rem}
+th{text-align:left;padding:10px 14px;color:rgba(255,0,51,.8);text-transform:uppercase;letter-spacing:.15em;font-size:.65rem;border-bottom:1px solid rgba(255,0,51,.3)}
+th:last-child{text-align:right}
+td{padding:10px 14px;border-bottom:1px solid rgba(255,0,51,.08)}
+td:last-child{text-align:right;color:#ff0033;font-family:monospace}
+tr.sub td{font-size:.75rem;color:rgba(255,255,255,.45);padding-left:28px}
+tr.sub td:last-child{color:rgba(255,255,255,.45)}
+tr:hover td{background:rgba(255,0,51,.04)}
+.ingredients{font-size:.75rem;line-height:1.8;color:rgba(255,200,200,.6);background:rgba(255,0,51,.05);padding:16px;border-radius:8px;border:1px solid rgba(255,0,51,.1);font-family:monospace}
+.warning{margin-top:8px;font-size:.7rem;color:rgba(255,150,150,.6)}
 </style>
 </head>
 <body>
@@ -48,23 +55,35 @@ h1{font-size:clamp(2rem,6vw,3.5rem);font-weight:900;text-transform:uppercase;let
   </ul>
 </nav>
 <main>
-  <h1>Nasze Smaki</h1>
-  <div class="line"></div>
-  <div class="grid">
-    <div class="card card-blue">
-      <div class="badge badge-blue">BEZ CUKRU</div>
-      <h2>Blue Nova</h2>
-      <p>Zanurz się w wirze galaktyki! Blue Nova to niebieska malina z prędkością światła – eksplozja chłodu, która teleportuje Cię prosto w objęcia supernowej.</p>
-      <a href="bluenova.html">Sprawdź skład i kaloryczność</a>
+  <a href="smaki.html" class="back">← Wróć do smaków</a>
+  <div class="hero">
+    <div class="planet-wrap">
+      <div class="planet"></div>
+      <div class="planet-label">Planeta pochodzenia: STRAWBERRY-X</div>
     </div>
-    <div class="card card-red">
-      <div class="badge badge-red">Z CUKREM</div>
-      <h2>Red Rocket</h2>
-      <p>Uderzenie arbuzowej energii! Red Rocket to eksplozja smaku arbuza, która wystrzeli Cię w kosmiczną podróż prosto na orbitę Marsa i z powrotem.</p>
-      <a href="redrocket.html">Sprawdź skład i kaloryczność</a>
+    <div>
+      <div class="badge">Z CUKREM</div>
+      <h1>Red Rocket</h1>
+      <p class="flavor">Smak: Arbuz</p>
+      <p class="desc">Arbuzowa eksplozja smaku! Red Rocket to mrożony hit prosto z planety Strawberry-X – pełen energii i intensywnego smaku arbuza. Wskakuj do rakiety!</p>
     </div>
   </div>
-  <div style="text-align:center"><a href="index.html" class="back">← Powrót do bazy</a></div>
+  <div class="card">
+    <h3>Wartości odżywcze (na 100 ml)</h3>
+    <table>
+      <tr><th>Składnik</th><th>Ilość</th></tr>
+      <tr><td>Wartość energetyczna</td><td>166 kJ / 39 kcal</td></tr>
+      <tr><td>Tłuszcz</td><td>0 g</td></tr>
+      <tr class="sub"><td>w tym kwasy nasycone</td><td>0 g</td></tr>
+      <tr><td>Węglowodany</td><td>9,6 g</td></tr>
+      <tr class="sub"><td>w tym cukry</td><td>9,6 g</td></tr>
+      <tr><td>Błonnik</td><td>0 g</td></tr>
+      <tr><td>Białko</td><td>0 g</td></tr>
+      <tr><td>Sól</td><td>0 g</td></tr>
+    </table>
+    <h3>Składniki</h3>
+    <p class="ingredients">Woda, cukier, regulator kwasowości: kwas cytrynowy; aromat; stabilizator: guma arabska, estry glicerolu i żywicy roślinnej; barwniki: czerwień koszenilowa, azorubina; substancje konserwujące: sorbinian potasu, benzoesan sodu.<br><span class="warning">Czerwień koszenilowa i azorubina mogą mieć szkodliwy wpływ na aktywność i skupienie uwagi u dzieci.</span></p>
+  </div>
 </main>
 <script>
 const c=document.getElementById('stars'),x=c.getContext('2d');
